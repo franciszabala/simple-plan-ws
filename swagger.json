@@ -1,0 +1,125 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Plan Web Service",
+        "description": "A POC for a simple web service",
+        "contact": {
+            "name": "Francis Zabala",
+            "email": "francis.zabala@yahoo.com"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/plans/all": {
+            "get": {
+                "description": "Returns all plans",
+                "responses": {
+                    "200": {
+                        "description": "List of plans",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/plan"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/plans/{id}": {
+            "get": {
+                "description": "Returns a plan based on a single ID",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of plan",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "plan response",
+                        "schema": {
+                            "$ref": "#/definitions/plan"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "plan": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "expiry": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "is_plan": {
+                    "type": "boolean"
+                },
+                "is_unlimited": {
+                    "type": "boolean"
+                },
+                "size_mb": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "4g": {
+                    "type": "boolean"
+                },
+                "auto_renew": {
+                    "type": "boolean"
+                },
+                "terms_url": {
+                    "type": "string"
+                },
+                "info_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "errorModel": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
